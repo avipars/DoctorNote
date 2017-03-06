@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Doctor\'s Note</string>
+    <string name="settings">Settings</string>
+    <string name="form_username">User</string>
+    <string name="hint_tname">Tzevet</string>
+    <string name="hint_name">Name</string>
+    <string name="btn_sign_up">Submit</string>
+
+    <string name="radio_kravi">Kravi</string>
+    <string name="radio_jobnick">Jobnick</string>
+    <string name="tzevet_name">Tzevet Name</string>
+    <string name="chayal">Chayal + Problem</string>
+
+    <string name="e_mail">Email</string>
+    <string name="valid_email">Please enter a valid email address.</string>
+    <string name="mand">All fields are mandatory.</string>
+
+    <string name="clear">Clear</string>
+    <string name="feedback">Feedback</string>
+    <string name="rate_error">No E-mail app found</string>
+    <string name="unex" translatable="false">"Unexpected code "</string>
+    <string name="success">Message successfully sent!</string>
+    <string name="mess_error">There was some errors sending the message. Please try again after waiting some time.</string>
+
+
+    <!-- About -->
+    <string name="about">About</string>
+     <string name="about_body"><![CDATA[
+         <b>Avi Parshan</b> created this app, Check his website and social media:<br/>
+        <a href=\'http://aviparshan.com\'>Website</a>&nbsp;&nbsp;
+        <a href=\'https://twitter.com/aviinfinity\'>Twitter</a>&nbsp;&nbsp;
+        <a href=\'https://www.youtube.com/user/aviinfinity\'>YouTube</a>&nbsp;&nbsp;
+        <a href=\'https://www.linkedin.com/in/aviparshan\'>LinkedIn</a>&nbsp;&nbsp;
+        <a href=\'https://www.facebook.com/appdeomcracy\'>Facebook</a>
+    ]]></string>
+    <string name="dismiss">Dismiss</string>
+    <string name="ok">OK</string>
+    <string name="language">Language</string>
+
+</resources>
