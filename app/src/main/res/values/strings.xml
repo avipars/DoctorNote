@@ -18,7 +18,7 @@
     <string name="clear">Clear</string>
     <string name="feedback">Feedback</string>
     <string name="rate_error">No E-mail app found</string>
-    <string name="unex">Unexpected code</string>
+    <string name="unex" translatable="false">Unexpected code</string>
     <string name="success">Message successfully sent!</string>
     <string name="mess_error">There was some errors sending the message. Please try again after waiting some time.</string>
     <string name="ok">OK</string>
