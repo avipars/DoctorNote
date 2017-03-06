@@ -9,6 +9,8 @@
     <string name="btn_sign_up">Submit</string>
     <string name="radio_kravi">Lochem</string>
     <string name="radio_jobnick">Mifkada</string>
+    <string name="bet">Bet Sefer</string>
+    <string name="amlach">Amlach</string>
     <string name="tzevet_name">Name</string>
     <string name="chayal">Chayal + Problem</string>
     <string name="valid_email">Please enter a valid email address.</string>
@@ -23,7 +25,6 @@
     <string name="about">About</string>
     <string name="dismiss">Dismiss</string>
     <string name="language">Language</string>
-    <string name="bet">Bet Sefer</string>
-    <string name="amlach">Amlach</string>
+
     <string name="phone_number">Phone Number</string>
 </resources>
