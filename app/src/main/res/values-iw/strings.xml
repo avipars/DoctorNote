@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <string name="app_name">מסדר רופא</string>
     <string name="settings">הגדרות</string>
     <string name="form_username">שם שימוש</string>
     <string name="hint_tname">צוות</string>
     <string name="hint_name">שם המגיש </string>
+    <string name="e_mail">מייל</string>
     <string name="btn_sign_up">שלח</string>
     <string name="radio_kravi">לוחמים</string>
     <string name="radio_jobnick">מפקדה</string>
-    <string name="tzevet_name">צוות/מדור</string>
+    <string name="tzevet_name">שם המגיש</string>
     <string name="chayal">חייל + בעייה</string>
     <string name="valid_email">להגיש מייל תקף</string>
     <string name="mand">כל השדות חובה</string>
@@ -19,17 +20,10 @@
     <string name="mess_error">נא לנסות שוב עוד מספר דקות</string>
     <string name="ok">אישור</string>
     <string name="about">אודות</string>
-    <string name="about_body"><![CDATA[
-       <b>אבי פרשן</b> יוצר האפליקציה, בקרו אותו באתר ובמדיה החברתית שלו!:<br/>
-       <a href=\'http://aviparshan.com\'>אתר</a>&nbsp;&nbsp;
-       <a href=\'https://twitter.com/aviinfinity\'>טוויטר</a>&nbsp;&nbsp;
-       <a href=\'https://www.youtube.com/user/aviinfinity\'>יוטיוב</a>&nbsp;&nbsp;
-       <a href=\'https://www.linkedin.com/in/aviparshan\'>לינקדאין</a>&nbsp;&nbsp;
-       <a href=\'https://www.facebook.com/appdeomcracy\'>פייסבוק</a>
-   ]]></string>
-
     <string name="dismiss">שחרר</string>
-    <string name="e_mail">מייל</string>
     <string name="language">שפה</string>
+    <string name="bet">בית ספר</string>
+    <string name="amlach">אמלח</string>
+    <string name="phone_number">מספר טלפון</string>
 
 </resources>

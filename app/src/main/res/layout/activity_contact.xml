@@ -29,7 +29,7 @@
 
         <RadioGroup
             android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
@@ -49,6 +49,22 @@
                 android:checked="false"
                 android:text="@string/radio_jobnick"
                 android:textSize="15sp" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/bet"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/amlach"
+                android:textSize="15sp" />
         </RadioGroup>
 
         <android.support.design.widget.TextInputLayout
@@ -67,6 +83,21 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/phoneEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:nextFocusDown="@+id/messageEditText" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -75,14 +106,14 @@
                 android:id="@+id/messageEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="8"
                 android:ellipsize="end"
-                android:maxLength="180"
-                android:maxLines="10"
-                android:scrollbars="vertical"
+                android:ems="10"
                 android:gravity="top"
+                android:maxLength="200"
                 android:hint="@string/chayal"
-                android:inputType="textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine" />
+                android:inputType="textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine"
+                android:maxLines="10"
+                android:scrollbars="vertical" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
@@ -111,7 +142,6 @@
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 

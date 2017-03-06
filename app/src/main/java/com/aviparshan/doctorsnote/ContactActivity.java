@@ -1,9 +1,5 @@
 package com.aviparshan.doctorsnote;
 
-/**
- * Created by avi on 2/23/2017 on com.aviparshan.doctorsnote
- */
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -47,23 +43,19 @@ public class ContactActivity extends AppCompatActivity {
     public static final MediaType FORM_DATA_TYPE
             = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
     //URL derived from form URL
-    public static final String URL = "https://docs.google.com/forms/d/e/1FAIpQLSeWDtBj4zVU1nhtcLUQdWxZ0M06kdcLh9YLSwnSwBEBXxPC-w/formResponse";
+    public static final String URL = "https://docs.google.com/forms/d/e/1FAIpQLSeZRkmZHtGDDGeejJ4AdCA0lDSxjm90Gmb2EtFtdYjfvh8W8w/formResponse";
     //input element ids found from the live form page
-    public static final String EMAIL_KEY = "entry_1777033391";
-    public static final String POSITION_KEY = "entry_1637835495";
-    public static final String SUBJECT_KEY = "entry_1187936896";
-    public static final String MESSAGE_KEY = "entry_910085193";
-    public static final String email = "avi.pars+krav@gmail.com";
+    public static final String POSITION_KEY = "entry.1432391311"; //lochem, etc.
+    public static final String SUBJECT_KEY = "entry.1637871118"; //name
+    public static final String PHONE_KEY = "entry.2057724045"; //PHONE
+    public static final String MESSAGE_KEY = "entry.1259802392"; //
 
-    public static final String JURL = "https://docs.google.com/forms/d/e/1FAIpQLSeJ9J7fX5O2llMoK6uqV5k8m7asxdlgY8rCzrnXMj21qBfjAQ/formResponse";
-    public static final String jemail = "avi.pars+job@gmail.com";
     //private final Context context;
     private Toolbar toolbar;
-    private EditText subjectEditText;
-    private EditText messageEditText;
+    private EditText subjectEditText, messageEditText, phoneEditText;
     private RadioGroup radioFightGroup;
     private RadioButton radioButton;
-    private TextInputLayout inputLayoutSubject, inputLayoutMessage;
+    private TextInputLayout inputLayoutSubject, inputLayoutPhone,inputLayoutMessage;
 
 
     @Override
@@ -79,32 +71,42 @@ public class ContactActivity extends AppCompatActivity {
         Button clearButton = (Button) findViewById(R.id.clearButton);
         final RadioButton kravi = (RadioButton) findViewById(R.id.radioButton);
         final RadioButton job = (RadioButton) findViewById(R.id.radioButton2);
+        final RadioButton bet = (RadioButton) findViewById(R.id.radioButton3);
+        final RadioButton amlach = (RadioButton) findViewById(R.id.radioButton4);
 
         inputLayoutSubject = (TextInputLayout) findViewById(R.id.input_layout_subject);
+        inputLayoutPhone = (TextInputLayout) findViewById(R.id.input_layout_phone);
         inputLayoutMessage = (TextInputLayout) findViewById(R.id.input_layout_message);
 
         subjectEditText = (EditText) findViewById(R.id.subjectEditText);
+        phoneEditText = (EditText) findViewById(R.id.phoneEditText);
         messageEditText = (EditText) findViewById(R.id.messageEditText);
 
         radioFightGroup = (RadioGroup) findViewById(radioGroup);
 
-        messageEditText.addTextChangedListener(new ContactActivity.MyTextWatcher(messageEditText));
         subjectEditText.addTextChangedListener(new ContactActivity.MyTextWatcher(subjectEditText));
+        phoneEditText.addTextChangedListener(new ContactActivity.MyTextWatcher(phoneEditText));
+        messageEditText.addTextChangedListener(new ContactActivity.MyTextWatcher(messageEditText));
 
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 kravi.setChecked(false);
                 job.setChecked(false);
+                bet.setChecked(false);
+                amlach.setChecked(false);
                 subjectEditText.getText().clear();
+                phoneEditText.getText().clear();
                 messageEditText.getText().clear();
+                subjectEditText.requestFocus();
             }
         });
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Make sure all the fields are filled with values
-                if (TextUtils.isEmpty(subjectEditText.getText().toString()) ||
+                if (TextUtils.isEmpty(subjectEditText.getText().toString()) || phoneEditText.length() == 0  ||
                         TextUtils.isEmpty(messageEditText.getText().toString())) {
                     Toast.makeText(ContactActivity.this, R.string.mand, Toast.LENGTH_LONG).show();
                     return;
@@ -117,34 +119,36 @@ public class ContactActivity extends AppCompatActivity {
                     Toast.makeText(ContactActivity.this, R.string.mand, Toast.LENGTH_LONG).show(); //em,pty
                     return;
                 }
-                //https://gist.github.com/sourabh86/4d65c12c93a545904bae
-                if (radioButton.getText().toString().equals("Jobnick") || radioButton.getText().toString().equals("מפקדה")) {
-                    //Create an object for PostDataTask AsyncTask
-                    PostDataTask postDataTask = new PostDataTask();
 
-                    //execute asynctask
-                    postDataTask.execute(JURL,
-                            jemail,
-                            "Jobnick",
-                            subjectEditText.getText().toString(),
-                            messageEditText.getText().toString());
-                } else {
-                    //Create an object for PostDataTask AsyncTask
-                    PostDataTask postDataTask = new PostDataTask();
-
-                    //execute asynctask
-                    postDataTask.execute(URL,
-                            email,
-                            "Kravi",
-                            subjectEditText.getText().toString(),
-                            messageEditText.getText().toString());
+                String pos = "test";
+                if(radioButton.getText().toString().equals("Lochem") || radioButton.getText().toString().equals("לוחמים")){
+                    pos = "לוחמים";
                 }
+                else if (radioButton.getText().toString().equals("Mifkada") || radioButton.getText().toString().equals("מפקדה")){
+                    pos = "מפקדה";
+                }
+                else if(radioButton.getText().toString().equals("Bet Sefer") || radioButton.getText().toString().equals("בית ספר")){
+                    pos = "בית ספר";
+                }
+                else if(radioButton.getText().toString().equals("Amlach") || radioButton.getText().toString().equals("אמלח")){
+                    pos = "אמלח";
+                }
+                else{
+                    Toast.makeText(ContactActivity.this, "Error with radio buttons: " + pos, Toast.LENGTH_SHORT).show();
+                }
+
+                //https://gist.github.com/sourabh86/4d65c12c93a545904bae
+                //Create an object for PostDataTask AsyncTask
+                PostDataTask postDataTask = new PostDataTask();
+
+                //execute asynctask
+                postDataTask.execute(URL,
+                        pos,
+                        subjectEditText.getText().toString(),
+                        phoneEditText.getText().toString(),
+                        messageEditText.getText().toString());
             }
-
-
         });
-
-
     }
 
     //AsyncTask to send data as a http POST request
@@ -154,9 +158,9 @@ public class ContactActivity extends AppCompatActivity {
         protected Boolean doInBackground(String... contactData) {
             Boolean result = true;
             String url = contactData[0];
-            String email = contactData[1]; //add one for new form
-            String position = contactData[2];
-            String subject = contactData[3];
+            String position = contactData[1];
+            String subject = contactData[2];
+            String phone = contactData[3];
             String message = contactData[4];
             String postBody = "";
 
@@ -164,10 +168,10 @@ public class ContactActivity extends AppCompatActivity {
                 //all values must be URL encoded to make sure that special characters like & | ",etc.
                 //do not cause problems
                 postBody =
-                        EMAIL_KEY + "=" + URLEncoder.encode(email, "UTF-8") + "&" +
                                 POSITION_KEY + "=" + URLEncoder.encode(position, "UTF-8") +
                                 "&" + SUBJECT_KEY + "=" + URLEncoder.encode(subject, "UTF-8") +
-                                "&" + MESSAGE_KEY + "=" + URLEncoder.encode(message, "UTF-8");
+                                "&" + PHONE_KEY + "=" + URLEncoder.encode(phone, "UTF-8") + "&" +
+                                        MESSAGE_KEY + "=" + URLEncoder.encode(message, "UTF-8");
             } catch (UnsupportedEncodingException ex) {
                 result = false;
             }
@@ -227,6 +231,8 @@ public class ContactActivity extends AppCompatActivity {
                 case R.id.subjectEditText:
                     //validateSubject();
                     break;
+                case R.id.phoneEditText:
+                    break;
                 case R.id.messageEditText:
                     // validateMessage();
                     break;
@@ -247,11 +253,8 @@ public class ContactActivity extends AppCompatActivity {
                          **/
                         if (which == 1) {
                             setLocale("iw");
-                            Refresh();
                         } else {
                             setLocale("en");
-                            Refresh();
-
                         }
                         return true;
                     }
@@ -294,9 +297,6 @@ public class ContactActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
-            case R.id.about:
-                AboutDialog.show(this);
-                return true;
             case R.id.feedback:
                 composeEmail();
                 return true;
@@ -310,23 +310,19 @@ public class ContactActivity extends AppCompatActivity {
 
     //test code changes language (call it in oncreate
     private void setLocale(String lang) {
-        Locale locale = new Locale(lang);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+            Locale locale = new Locale(lang);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+            Refresh(); //restarts activity with new changes
     }
 
     private void Refresh() {
         Intent refresh = new Intent(ContactActivity.this, ContactActivity.class);
         startActivity(refresh);
         finish();
-    }
-
-    private void restartActivity() {
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
     }
 
     @Override

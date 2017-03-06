@@ -7,10 +7,7 @@
         android:id="@+id/feedback"
         android:title="@string/feedback"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/about"
-        android:title="@string/about"
-        app:showAsAction="never"/>
+
     <item
         android:id="@+id/lang"
         android:title="@string/language"
