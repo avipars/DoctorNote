@@ -1,4 +1,9 @@
 # DoctorNote
 The official doctor's note app
-ttb
+
+
+# V1
+* Sending data from app to google form
+
+TODO: Auto-send emails (server-side)
 
