@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -36,10 +39,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.aviparshan.doctorsnote.R.id.lang;
 import static com.aviparshan.doctorsnote.R.id.radioGroup;
 
 public class ContactActivity extends AppCompatActivity {
+    private static final String TAG = "ContactActivity";
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     public static final MediaType FORM_DATA_TYPE
             = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
     //URL derived from form URL
@@ -61,12 +67,15 @@ public class ContactActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_contact);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        //Get references to UI elements in the layout
+        FirebaseCrash.log("Activity Created");
+
+                //Get references to UI elements in the layout
         Button sendButton = (Button) findViewById(R.id.sendButton);
         Button clearButton = (Button) findViewById(R.id.clearButton);
         final RadioButton kravi = (RadioButton) findViewById(R.id.radioButton);
@@ -99,6 +108,7 @@ public class ContactActivity extends AppCompatActivity {
                 phoneEditText.getText().clear();
                 messageEditText.getText().clear();
                 subjectEditText.requestFocus();
+                FirebaseCrash.log("Clear Button Pressed");
             }
         });
 
@@ -147,6 +157,14 @@ public class ContactActivity extends AppCompatActivity {
                         subjectEditText.getText().toString(),
                         phoneEditText.getText().toString(),
                         messageEditText.getText().toString());
+
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, subjectEditText.getText().toString());
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, pos);
+                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "submission");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+                FirebaseCrash.log("Send Button Pressed");
+
             }
         });
     }
@@ -174,6 +192,8 @@ public class ContactActivity extends AppCompatActivity {
                                         MESSAGE_KEY + "=" + URLEncoder.encode(message, "UTF-8");
             } catch (UnsupportedEncodingException ex) {
                 result = false;
+                FirebaseCrash.logcat(Log.ERROR, TAG, "UnsupportedEncodingException caught");
+                FirebaseCrash.report(ex);
             }
 
             try {
@@ -193,6 +213,8 @@ public class ContactActivity extends AppCompatActivity {
                 System.out.println(response.body().string());
             } catch (IOException exception) {
                 result = false;
+                FirebaseCrash.logcat(Log.ERROR, TAG, "IOException caught");
+                FirebaseCrash.report(exception);
             }
             return result;
         }
@@ -201,16 +223,20 @@ public class ContactActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             //Print Success or failure message accordingly
             Toast.makeText(ContactActivity.this, result ? getString(R.string.success) : getString(R.string.mess_error), Toast.LENGTH_LONG).show();
+            FirebaseCrash.log("Post Execute");
+
         }
 
     }
 
     private void hideKeyboard() {
+        FirebaseCrash.log("Hide Keyboard");
         View view = getCurrentFocus();
         if (view != null) {
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
                     hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+
     }
 
     private class MyTextWatcher implements TextWatcher {
@@ -251,10 +277,21 @@ public class ContactActivity extends AppCompatActivity {
                          * If you use alwaysCallSingleChoiceCallback(), which is discussed below,
                          * returning false here won't allow the newly selected radio button to actually be selected.
                          **/
+                        String language = "";
                         if (which == 1) {
                             setLocale("iw");
+                            language = "Hebrew";
+                            FirebaseAnalytics analytics = FirebaseAnalytics.getInstance( ContactActivity.this );
+                            analytics.setUserProperty( "Language", language );
+                            FirebaseCrash.log("Change Language iw");
+
                         } else {
                             setLocale("en");
+                            language = "English";
+                            FirebaseAnalytics analytics = FirebaseAnalytics.getInstance( ContactActivity.this );
+                            analytics.setUserProperty( "Language", language );
+                            FirebaseCrash.log("Change Language en");
+
                         }
                         return true;
                     }
@@ -281,6 +318,8 @@ public class ContactActivity extends AppCompatActivity {
             startActivity(intent);
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(ContactActivity.this, R.string.rate_error, Toast.LENGTH_SHORT).show();
+            FirebaseCrash.logcat(Log.ERROR, TAG, "ActivityNotFound");
+            FirebaseCrash.report(ex);
         }
     }
 
@@ -300,7 +339,7 @@ public class ContactActivity extends AppCompatActivity {
             case R.id.feedback:
                 composeEmail();
                 return true;
-            case R.id.lang:
+            case lang:
                 changeLang();
                 return true;
             default:

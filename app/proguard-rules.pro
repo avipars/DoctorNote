@@ -17,3 +17,14 @@
 #}
 -dontwarn okhttp3.**
 -dontwarn okio.**
+
+-keepattributes EnclosingMethod
+-keepattributes InnerClasses
+-keep class com.firebase.** { *; }
+-keep class org.apache.** { *; }
+-keepnames class com.shaded.fasterxml.** { *; }
+-keepnames class com.fasterxml.jackson.** { *; }
+-keepnames class javax.servlet.** { *; }
+-keepnames class org.ietf.jgss.** { *; }
+-dontwarn org.apache.**
+-dontwarn org.w3c.dom.**
