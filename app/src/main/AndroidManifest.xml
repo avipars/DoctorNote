@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aviparshan.doctorsnote">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="false"
@@ -17,7 +17,9 @@
             android:name=".ContactActivity"
             android:label="@string/app_name"
             android:configChanges="locale"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustNothing|stateHidden"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +27,5 @@
             </intent-filter>
         </activity>
     </application>
-
-
 
 </manifest>

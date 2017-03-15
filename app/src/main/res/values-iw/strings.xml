@@ -7,10 +7,9 @@
     <string name="hint_name">שם המגיש </string>
     <string name="e_mail">מייל</string>
     <string name="btn_sign_up">שלח</string>
-    <string name="radio_kravi">לוחמים</string>
-    <string name="radio_jobnick">מפקדה</string>
-    <string name="tzevet_name">שם המגיש</string>
-    <string name="chayal">חייל + בעייה</string>
+    <string name="radio_mifkada">מפקדה</string>
+    <string name="person_name">שם המגיש</string>
+    <string name="chayal">חייל + סיבה</string>
     <string name="valid_email">להגיש מייל תקף</string>
     <string name="mand">כל השדות חובה</string>
     <string name="clear">מחק</string>
@@ -25,5 +24,11 @@
     <string name="bet">בית ספר</string>
     <string name="amlach">אמלח</string>
     <string name="phone_number">מספר טלפון</string>
+    <string name="team">צוות/מחלקה</string>
+    <string name="pluga_a">פלגה א</string>
+    <string name="pluga_b">פלגה ב</string>
+    <string name="pluga_c">פלגה ג</string>
+    <string name="pluga_d">פלגה ד</string>
+    <string name="pluga">פלוגה</string>
 
 </resources>

@@ -4,5 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="red">#f40010</color>
-
+    <color name="gray">#f8aba4a4</color>
+    <color name="base">#f8d6d4d4</color>
+    <color name="highlight">#f8fde632</color>
+    <color name="hint">#FF4081</color>
+    <color name="arrow">#f8aba4a4</color>
+    <color name="floating_label">#f8ed5fbe</color>
+    <color name="spinner_base_color">#44000000</color>
 </resources>

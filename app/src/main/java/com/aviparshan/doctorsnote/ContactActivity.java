@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -38,9 +39,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import smtchahal.materialspinner.MaterialSpinner;
 
 import static com.aviparshan.doctorsnote.R.id.lang;
-import static com.aviparshan.doctorsnote.R.id.radioGroup;
 
 public class ContactActivity extends AppCompatActivity {
     private static final String TAG = "ContactActivity";
@@ -49,20 +50,20 @@ public class ContactActivity extends AppCompatActivity {
     public static final MediaType FORM_DATA_TYPE
             = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
     //URL derived from form URL
-    public static final String URL = "https://docs.google.com/forms/d/e/1FAIpQLSeZRkmZHtGDDGeejJ4AdCA0lDSxjm90Gmb2EtFtdYjfvh8W8w/formResponse";
+    public static final String URL = "https://docs.google.com/forms/d/e/1FAIpQLSe-pgn7YMnit-uPFEJh3_b8_qn1aCCRfJoCxwHikCK2XROYsw/formResponse";
     //input element ids found from the live form page
-    public static final String POSITION_KEY = "entry.1432391311"; //lochem, etc.
-    public static final String SUBJECT_KEY = "entry.1637871118"; //name
-    public static final String PHONE_KEY = "entry.2057724045"; //PHONE
-    public static final String MESSAGE_KEY = "entry.1259802392"; //
+    public static final String PLUGA_KEY = "entry.1324303824"; //pluga, etc.
+    public static final String NAME_KEY = "entry.92413629"; //name
+    public static final String TZEVET_KEY = "entry.1051971041"; //tzevet team
+    public static final String PHONE_KEY = "entry.770306352"; //PHONE
+    public static final String MESSAGE_KEY = "entry.1916074252"; //chayal and reason
 
     //private final Context context;
     private Toolbar toolbar;
-    private EditText subjectEditText, messageEditText, phoneEditText;
+    private EditText subjectEditText, messageEditText, phoneEditText, tzevetEditText;
+    private TextInputLayout inputLayoutSubject, inputLayoutTzevet, inputLayoutPhone,inputLayoutMessage;
     private RadioGroup radioFightGroup;
     private RadioButton radioButton;
-    private TextInputLayout inputLayoutSubject, inputLayoutPhone,inputLayoutMessage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,73 +79,109 @@ public class ContactActivity extends AppCompatActivity {
                 //Get references to UI elements in the layout
         Button sendButton = (Button) findViewById(R.id.sendButton);
         Button clearButton = (Button) findViewById(R.id.clearButton);
-        final RadioButton kravi = (RadioButton) findViewById(R.id.radioButton);
-        final RadioButton job = (RadioButton) findViewById(R.id.radioButton2);
-        final RadioButton bet = (RadioButton) findViewById(R.id.radioButton3);
-        final RadioButton amlach = (RadioButton) findViewById(R.id.radioButton4);
 
         inputLayoutSubject = (TextInputLayout) findViewById(R.id.input_layout_subject);
+        inputLayoutTzevet = (TextInputLayout) findViewById(R.id.input_layout_tzevet);
         inputLayoutPhone = (TextInputLayout) findViewById(R.id.input_layout_phone);
         inputLayoutMessage = (TextInputLayout) findViewById(R.id.input_layout_message);
 
         subjectEditText = (EditText) findViewById(R.id.subjectEditText);
+        tzevetEditText = (EditText) findViewById(R.id.tzevetEditText);
         phoneEditText = (EditText) findViewById(R.id.phoneEditText);
         messageEditText = (EditText) findViewById(R.id.messageEditText);
 
-        radioFightGroup = (RadioGroup) findViewById(radioGroup);
-
+        //radioFightGroup = (RadioGroup) findViewById(radioGroup);
+        //Spinner staticSpinner = (Spinner) findViewById(R.id.spinner);
+         final MaterialSpinner spinner;
         subjectEditText.addTextChangedListener(new ContactActivity.MyTextWatcher(subjectEditText));
+        tzevetEditText.addTextChangedListener(new ContactActivity.MyTextWatcher(tzevetEditText));
         phoneEditText.addTextChangedListener(new ContactActivity.MyTextWatcher(phoneEditText));
         messageEditText.addTextChangedListener(new ContactActivity.MyTextWatcher(messageEditText));
+
+        String[] ITEMS = {getString(R.string.pluga_a), getString(R.string.pluga_b), getString(R.string.pluga_c), getString(R.string.pluga_d), getString(R.string.radio_mifkada), getString(R.string.bet), getString(R.string.amlach)};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner = (MaterialSpinner) findViewById(R.id.spinner1);
+        spinner.setAdapter(adapter);
+        //spinner.setHint(R.string.pluga);
 
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                kravi.setChecked(false);
-                job.setChecked(false);
-                bet.setChecked(false);
-                amlach.setChecked(false);
+                //kravi.setChecked(false);
+
                 subjectEditText.getText().clear();
+                tzevetEditText.getText().clear();
                 phoneEditText.getText().clear();
                 messageEditText.getText().clear();
                 subjectEditText.requestFocus();
+                //spinner.requestFocus();
                 FirebaseCrash.log("Clear Button Pressed");
             }
         });
+
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Make sure all the fields are filled with values
-                if (TextUtils.isEmpty(subjectEditText.getText().toString()) || phoneEditText.length() == 0  ||
+                if (TextUtils.isEmpty(subjectEditText.getText().toString()) ||  TextUtils.isEmpty(tzevetEditText.getText().toString()) || phoneEditText.length() == 0  ||
                         TextUtils.isEmpty(messageEditText.getText().toString())) {
                     Toast.makeText(ContactActivity.this, R.string.mand, Toast.LENGTH_LONG).show();
                     return;
                 }
                 hideKeyboard();
 
-                int selectedId = radioFightGroup.getCheckedRadioButtonId();
-                radioButton = (RadioButton) findViewById(selectedId);
-                if (selectedId == -1) {
-                    Toast.makeText(ContactActivity.this, R.string.mand, Toast.LENGTH_LONG).show(); //em,pty
-                    return;
-                }
+                //(String) spinner.getSelectedItem();
+               // int selectedId = radioFightGroup.getCheckedRadioButtonId();
+                //long id =  spinner.getSelectedItemId();
+                //radioButton = (RadioButton) findViewById(selectedId);
+                //if (id == -1) {
+                 //  Toast.makeText(ContactActivity.this, R.string.mand, Toast.LENGTH_LONG).show(); //em,pty
+                  //  return;
+             //  }
+                String itemText = spinner.getSelectedItem().toString();
 
+                //String itemText = "Amlac";
                 String pos = "test";
-                if(radioButton.getText().toString().equals("Lochem") || radioButton.getText().toString().equals("לוחמים")){
-                    pos = "לוחמים";
-                }
-                else if (radioButton.getText().toString().equals("Mifkada") || radioButton.getText().toString().equals("מפקדה")){
-                    pos = "מפקדה";
-                }
-                else if(radioButton.getText().toString().equals("Bet Sefer") || radioButton.getText().toString().equals("בית ספר")){
-                    pos = "בית ספר";
-                }
-                else if(radioButton.getText().toString().equals("Amlach") || radioButton.getText().toString().equals("אמלח")){
-                    pos = "אמלח";
-                }
-                else{
-                    Toast.makeText(ContactActivity.this, "Error with radio buttons: " + pos, Toast.LENGTH_SHORT).show();
+
+                if(itemText.equals("Pluga") || itemText.equals("פלוגה")){
+                    //pos = "לוחמים";
+                    Toast.makeText(ContactActivity.this, R.string.mand, Toast.LENGTH_LONG).show(); //em,pty
+                     return;
+               }
+                switch (itemText) {
+                    case "Battalion A":
+                    case "פלגה א":
+                        pos = "פלגה א";
+                        break;
+                    case "Battalion B":
+                    case "פלגה ב":
+                        pos = "פלגה ב";
+                        break;
+                    case "Battalion C":
+                    case "פלגה ג":
+                        pos = "פלגה ג";
+                        break;
+                    case "Battalion D":
+                    case "פלגה ד":
+                        pos = "פלגה ד";
+                        break;
+                    case "Mifkada":
+                    case "מפקדה":
+                        pos = "מפקדה";
+                        break;
+                    case "Bet Sefer":
+                    case "בית ספר":
+                        pos = "בית ספר";
+                        break;
+                    case "Amlach":
+                    case "אמלח":
+                        pos = "אמלח";
+                        break;
+                    default:
+                        Toast.makeText(ContactActivity.this, "Error with radio buttons: " + pos, Toast.LENGTH_SHORT).show();
+                        return;
                 }
 
                 //https://gist.github.com/sourabh86/4d65c12c93a545904bae
@@ -155,6 +192,7 @@ public class ContactActivity extends AppCompatActivity {
                 postDataTask.execute(URL,
                         pos,
                         subjectEditText.getText().toString(),
+                        tzevetEditText.getText().toString(),
                         phoneEditText.getText().toString(),
                         messageEditText.getText().toString());
 
@@ -169,6 +207,7 @@ public class ContactActivity extends AppCompatActivity {
         });
     }
 
+
     //AsyncTask to send data as a http POST request
     private class PostDataTask extends AsyncTask<String, Void, Boolean> {
 
@@ -177,17 +216,19 @@ public class ContactActivity extends AppCompatActivity {
             Boolean result = true;
             String url = contactData[0];
             String position = contactData[1];
-            String subject = contactData[2];
-            String phone = contactData[3];
-            String message = contactData[4];
+            String tzevet = contactData[2];
+            String subject = contactData[3];
+            String phone = contactData[4];
+            String message = contactData[5];
             String postBody = "";
 
             try {
                 //all values must be URL encoded to make sure that special characters like & | ",etc.
                 //do not cause problems
                 postBody =
-                                POSITION_KEY + "=" + URLEncoder.encode(position, "UTF-8") +
-                                "&" + SUBJECT_KEY + "=" + URLEncoder.encode(subject, "UTF-8") +
+                                PLUGA_KEY + "=" + URLEncoder.encode(position, "UTF-8") +
+                                "&" + NAME_KEY + "=" + URLEncoder.encode(subject, "UTF-8") +
+                                        "&" + TZEVET_KEY + "=" + URLEncoder.encode(tzevet, "UTF-8") +
                                 "&" + PHONE_KEY + "=" + URLEncoder.encode(phone, "UTF-8") + "&" +
                                         MESSAGE_KEY + "=" + URLEncoder.encode(message, "UTF-8");
             } catch (UnsupportedEncodingException ex) {
@@ -230,11 +271,12 @@ public class ContactActivity extends AppCompatActivity {
     }
 
     private void hideKeyboard() {
-        FirebaseCrash.log("Hide Keyboard");
         View view = getCurrentFocus();
         if (view != null) {
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
                     hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            FirebaseCrash.log("Hide Keyboard");
+
         }
 
     }
@@ -252,12 +294,18 @@ public class ContactActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         }
 
+
+
         public void afterTextChanged(Editable editable) {
             switch (view.getId()) {
                 case R.id.subjectEditText:
                     //validateSubject();
                     break;
+                case R.id.tzevetEditText:
+                    //validateSubject();
+                    break;
                 case R.id.phoneEditText:
+                   // validateName();
                     break;
                 case R.id.messageEditText:
                     // validateMessage();

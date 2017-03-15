@@ -27,45 +27,13 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.AppCompatRadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/radio_kravi"
-                android:textSize="15sp" />
-
-            <android.support.v7.widget.AppCompatRadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/radio_jobnick"
-                android:textSize="15sp" />
-
-            <android.support.v7.widget.AppCompatRadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/bet"
-                android:textSize="15sp" />
-
-            <android.support.v7.widget.AppCompatRadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/amlach"
-                android:textSize="15sp" />
-        </RadioGroup>
+        <smtchahal.materialspinner.MaterialSpinner
+            android:id="@+id/spinner1"
+            app:ms_alignLabels="false"
+            app:ms_baseColor="@color/spinner_base_color"
+            app:ms_multiline="false"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_subject"
@@ -77,7 +45,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/tzevet_name"
+                android:hint="@string/person_name"
+                android:inputType="textCapWords|textAutoComplete|textPersonName"
+                android:nextFocusDown="@+id/messageEditText" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_tzevet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/tzevetEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/team"
                 android:inputType="textCapWords|textAutoComplete|textPersonName"
                 android:nextFocusDown="@+id/messageEditText" />
         </android.support.design.widget.TextInputLayout>

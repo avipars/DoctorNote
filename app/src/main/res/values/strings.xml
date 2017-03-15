@@ -7,11 +7,9 @@
     <string name="hint_name">Name</string>
     <string name="e_mail">Email</string>
     <string name="btn_sign_up">Submit</string>
-    <string name="radio_kravi">Lochem</string>
-    <string name="radio_jobnick">Mifkada</string>
-    <string name="bet">Bet Sefer</string>
-    <string name="amlach">Amlach</string>
-    <string name="tzevet_name">Name</string>
+    <string name="person_name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="team">Team/Department</string>
     <string name="chayal">Chayal + Problem</string>
     <string name="valid_email">Please enter a valid email address.</string>
     <string name="mand">All fields are mandatory.</string>
@@ -25,6 +23,13 @@
     <string name="about">About</string>
     <string name="dismiss">Dismiss</string>
     <string name="language">Language</string>
+    <string name="bet">Bet Sefer</string>
+    <string name="amlach">Amlach</string>
+    <string name="radio_mifkada">Mifkada</string>
+    <string name="pluga_a">Battalion A</string>
+    <string name="pluga_b">Battalion B</string>
+    <string name="pluga_c">Battalion C</string>
+    <string name="pluga_d">Battalion D</string>
+    <string name="pluga">Pluga</string>
 
-    <string name="phone_number">Phone Number</string>
 </resources>
