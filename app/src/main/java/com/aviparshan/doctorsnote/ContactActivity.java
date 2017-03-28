@@ -50,13 +50,13 @@ public class ContactActivity extends AppCompatActivity {
     public static final MediaType FORM_DATA_TYPE
             = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
     //URL derived from form URL
-    public static final String URL = "https://docs.google.com/forms/d/e/1FAIpQLSe-pgn7YMnit-uPFEJh3_b8_qn1aCCRfJoCxwHikCK2XROYsw/formResponse";
+    public static final String URL = "https://docs.google.com/forms/d/e/randomform/formResponse";
     //input element ids found from the live form page
-    public static final String PLUGA_KEY = "entry.1324303824"; //pluga, etc.
-    public static final String NAME_KEY = "entry.92413629"; //name
-    public static final String TZEVET_KEY = "entry.1051971041"; //tzevet team
-    public static final String PHONE_KEY = "entry.770306352"; //PHONE
-    public static final String MESSAGE_KEY = "entry.1916074252"; //chayal and reason
+    public static final String PLUGA_KEY = "entry.123456789"; //pluga, etc. 
+    public static final String NAME_KEY = "entry.2123456789"; //name
+    public static final String TZEVET_KEY = "entry.3123456789"; //tzevet team
+    public static final String PHONE_KEY = "entry.5123456789"; //PHONE
+    public static final String MESSAGE_KEY = "entry.9123456789"; //chayal and reason
 
     //private final Context context;
     private Toolbar toolbar;
