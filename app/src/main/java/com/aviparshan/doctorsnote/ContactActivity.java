@@ -53,10 +53,10 @@ public class ContactActivity extends AppCompatActivity {
     public static final String URL = "https://docs.google.com/forms/d/e/randomform/formResponse";
     //input element ids found from the live form page
     public static final String PLUGA_KEY = "entry.123456789"; //pluga, etc. 
-    public static final String NAME_KEY = "entry.2123456789"; //name
-    public static final String TZEVET_KEY = "entry.3123456789"; //tzevet team
-    public static final String PHONE_KEY = "entry.5123456789"; //PHONE
-    public static final String MESSAGE_KEY = "entry.9123456789"; //chayal and reason
+    public static final String NAME_KEY = "entry.2921828181"; //name
+    public static final String TZEVET_KEY = "entry.223543553355"; //tzevet team
+    public static final String PHONE_KEY = "entry.2822981911"; //PHONE
+    public static final String MESSAGE_KEY = "entry.144455555"; //chayal and reason
 
     //private final Context context;
     private Toolbar toolbar;
@@ -358,7 +358,7 @@ public class ContactActivity extends AppCompatActivity {
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"avi@aviparshan.com"});
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"apps@aviparshan.com"});
         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
         intent.putExtra(Intent.EXTRA_TEXT, "App Information \n" +
                 "Phone Model: " + PhoneModel + "\nAndroid Version: " + AndroidVersion + "\nAPI Level: " + API + "\nVersion Code: " + versionCode + "\nVersion Name: " + versionName + "\nLanguage: " + Language);
